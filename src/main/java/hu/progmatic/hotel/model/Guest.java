@@ -1,9 +1,6 @@
 package hu.progmatic.hotel.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Date;
 
@@ -19,12 +16,13 @@ public class Guest {
     private Date birthDate;
     private String personalId;
     private String email;
-    private boolean isActive; //talan az archivalashoz
+    @Column(columnDefinition ="boolean default true" )
+    private boolean isActive = true; //talan az archivalashoz
 
     public Guest() {
     }
 
-    public Guest(Long id, String title, String firstName, String lastName, String birthPlace, Date birthDate, String personalId, String email) {
+    public Guest(Long id, String title, String firstName, String lastName, String birthPlace, Date birthDate, String personalId, String email, boolean isActive) {
         this.id = id;
         this.title = title;
         this.firstName = firstName;
@@ -33,6 +31,7 @@ public class Guest {
         this.birthDate = birthDate;
         this.personalId = personalId;
         this.email = email;
+        this.isActive = isActive;
     }
 
     public Long getId() {
@@ -97,5 +96,13 @@ public class Guest {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 }
