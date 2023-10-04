@@ -9,11 +9,15 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "room_number")
-
     private String roomNumber;
+
+    @Column(name = "capacity")
     private int capacity;
+    @Column(name = "nightly_price")
     private double nightlyPrice;
+    @Column(name = "has_Jacuzzi")
     private boolean hasJacuzzi;
+    @Column(name = "has_sauna")
     private boolean hasSauna;
 
     public Room() {
