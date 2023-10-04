@@ -1,0 +1,78 @@
+package hu.progmatic.hotel.model;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
+public class Room {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String roomNumber;
+    private int capacity;
+    private double nightlyPrice;
+    private boolean hasJacuzzi;
+    private boolean hasSauna;
+
+    public Room() {
+    }
+
+    public Room(Long id, String roomNumber, int capacity, double nightlyPrice, boolean hasJacuzzi, boolean hasSauna) {
+        this.id = id;
+        this.roomNumber = roomNumber;
+        this.capacity = capacity;
+        this.nightlyPrice = nightlyPrice;
+        this.hasJacuzzi = hasJacuzzi;
+        this.hasSauna = hasSauna;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getRoomNumber() {
+        return roomNumber;
+    }
+
+    public void setRoomNumber(String roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public double getNightlyPrice() {
+        return nightlyPrice;
+    }
+
+    public void setNightlyPrice(double nightlyPrice) {
+        this.nightlyPrice = nightlyPrice;
+    }
+
+    public boolean isHasJacuzzi() {
+        return hasJacuzzi;
+    }
+
+    public void setHasJacuzzi(boolean hasJacuzzi) {
+        this.hasJacuzzi = hasJacuzzi;
+    }
+
+    public boolean isHasSauna() {
+        return hasSauna;
+    }
+
+    public void setHasSauna(boolean hasSauna) {
+        this.hasSauna = hasSauna;
+    }
+}
