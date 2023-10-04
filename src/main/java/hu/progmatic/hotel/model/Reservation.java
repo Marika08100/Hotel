@@ -8,8 +8,10 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
+    @JoinColumn(name = "guest_id")
     private Guest guest;
     @ManyToOne
+    @JoinColumn(name = "room_id")
     private Room room;
 
     public Reservation() {

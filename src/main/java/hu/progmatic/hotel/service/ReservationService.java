@@ -5,6 +5,8 @@ import hu.progmatic.hotel.repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ReservationService {
     @Autowired
@@ -15,5 +17,9 @@ public class ReservationService {
     }
     public void deleteReservation(Long id){
         reservationRepository.deleteById(id);
+    }
+
+    public List<Reservation> getAllReservation() {
+        return reservationRepository.findAll();
     }
 }
