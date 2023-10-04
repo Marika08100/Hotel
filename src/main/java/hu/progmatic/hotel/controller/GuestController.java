@@ -4,18 +4,21 @@ import hu.progmatic.hotel.model.Guest;
 import hu.progmatic.hotel.service.GuestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/guests")
+@RequestMapping("guests")
 public class GuestController {
     @Autowired
     private GuestService guestService;
+    @GetMapping("")
+    public List<Guest> getAllGuest(){
+        return guestService.getAllGuest();
+    }
 
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity<Guest> createOrUpdateGuest(@RequestBody Guest guest){
         return ResponseEntity.ok(guestService.creatOrUpdateGuest(guest));
     }

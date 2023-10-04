@@ -7,19 +7,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/reservation")
+@RequestMapping("/reservations")
 public class ReservationController {
 
     @Autowired
     private ReservationService reservationService;
 
     @PostMapping("/")
-    public ResponseEntity<Reservation> createOrUpdateReservation(Reservation reservation){
-        return  ResponseEntity.ok(reservationService.createOrUpdateReservation(reservation));
+    public ResponseEntity<Reservation> createOrUpdateReservation(Reservation reservation) {
+        return ResponseEntity.ok(reservationService.createOrUpdateReservation(reservation));
     }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteReservation(@PathVariable Long id){
+    public ResponseEntity<Void> deleteReservation(@PathVariable Long id) {
         reservationService.deleteReservation(id);
         return ResponseEntity.noContent().build();
     }
+
 }

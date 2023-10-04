@@ -9,14 +9,21 @@ public class Guest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "title")
     private String title;
+    @Column(name = "first_nme")
     private String firstName;
+    @Column(name = "last_name")
     private String lastName;
+    @Column(name = "birth_place")
     private String birthPlace;
+    @Column(name = "birth_date")
     private Date birthDate;
+    @Column(name = "personal_id")
     private String personalId;
+    @Column(name = "email")
     private String email;
-    @Column(columnDefinition ="boolean default true" )
+    @Column(columnDefinition = "boolean default true", name = "active")
     private boolean isActive = true; //talan az archivalashoz
 
     public Guest() {
