@@ -1,0 +1,13 @@
+hu\progmatic\hotel\repository\RoomRepository.class
+hu\progmatic\hotel\controller\ReservationController.class
+hu\progmatic\hotel\HotelApplication.class
+hu\progmatic\hotel\controller\RoomController.class
+hu\progmatic\hotel\repository\GuestRepository.class
+hu\progmatic\hotel\model\Reservation.class
+hu\progmatic\hotel\model\Room.class
+hu\progmatic\hotel\model\Guest.class
+hu\progmatic\hotel\service\RoomService.class
+hu\progmatic\hotel\controller\GuestController.class
+hu\progmatic\hotel\repository\ReservationRepository.class
+hu\progmatic\hotel\service\GuestService.class
+hu\progmatic\hotel\service\ReservationService.class

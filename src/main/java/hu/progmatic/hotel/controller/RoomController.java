@@ -6,10 +6,7 @@ import hu.progmatic.hotel.service.ReservationService;
 import hu.progmatic.hotel.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,9 +21,10 @@ public class RoomController {
     public List<Room> getAllRooms() {
         return roomService.findAllRoom();
     }
-
+// TODO Új szállodai szobákat ne lehessen se felvenni, se törölni, ám legyenek módosíthatóak a meglévők!
     @PostMapping("/")
-    public ResponseEntity<Room> createOrUpdateRoom(Room room) {
+    public ResponseEntity<Room> createOrUpdateRoom(@RequestBody  Room room) {
         return ResponseEntity.ok(roomService.createOrUpdateRoom(room));
     }
+
 }
