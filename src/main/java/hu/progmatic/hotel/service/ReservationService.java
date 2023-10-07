@@ -36,17 +36,18 @@ public class ReservationService {
         return reservationRepository.findByStartDateLessThanEqualAndEndDateGreaterThanEqual(today, today);
     }
 
-    // TODO a szállodai adott napon lévő telítettségéről
-    public long getOccupancyForDate(LocalDate date, LocalDate localDate) {
-        List<Reservation> reservationsForDate = reservationRepository.findByStartDateAndEndDate(date, localDate);
-        return reservationsForDate.size();
+    public List<Reservation> getReservationsForDate(LocalDate date) {
+        return reservationRepository.findByStartDate(date);
     }
 
-    public double getOccupancyPercentageForDate(LocalDate date) {
-        int totalRooms = (int) roomRepository.count();
-        int reservationsForDate = reservationRepository.findReservationsForDate(date).size();
-        return (double) reservationsForDate / totalRooms * 100;
+    public double getReservationTotalPrice(Long reservationId) {
+        Optional<Reservation> reservation = reservationRepository.findById(reservationId);
+        if (reservation.isPresent()) {
+            return reservation.get().getTotalPrice();
+        } else {
+            throw new IllegalArgumentException("Reservation not found with id: " + reservationId);
+        }
+
+
     }
-
-
 }

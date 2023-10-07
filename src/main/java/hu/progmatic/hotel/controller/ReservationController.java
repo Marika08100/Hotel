@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,12 +45,19 @@ public class ReservationController {
         List<Reservation> occupancyData = reservationService.getReservationsForToday();
         return ResponseEntity.ok(occupancyData);
     }
+
     @GetMapping("/occupancy/{date}")
-    public ResponseEntity<Double> getOccupancyForDate(@PathVariable String date) {
+    public ResponseEntity<List<Reservation>> getOccupancyForDate(@PathVariable String date) {
         LocalDate parsedDate = LocalDate.parse(date);
-        double occupancyPercentage = reservationService.getOccupancyPercentageForDate(parsedDate);
-        return ResponseEntity.ok(occupancyPercentage);
+        List<Reservation> reservations = reservationService.getReservationsForDate(parsedDate);
+        return ResponseEntity.ok(reservations);
     }
+
+    @GetMapping("{reservationsId}/total-price")
+    public  ResponseEntity<Double> getTotalPrice(@PathVariable Long reservationsId){
+        return ResponseEntity.ok(reservationService.getReservationTotalPrice(reservationsId));
+    }
+
 
 
 
