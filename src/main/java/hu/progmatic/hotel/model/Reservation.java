@@ -3,6 +3,7 @@ package hu.progmatic.hotel.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 import static java.time.LocalTime.MAX;
@@ -35,6 +36,10 @@ public class Reservation {
         this.room = room;
         this.startDate = startDate;
         this.endDate = endDate;
+    }
+    public double getTotalPrice(){
+        long nights = ChronoUnit.DAYS.between(startDate,endDate);
+        return nights  * room.getNightlyPrice();
     }
 
     public Long getId() {

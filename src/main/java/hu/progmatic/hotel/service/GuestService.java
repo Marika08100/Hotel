@@ -3,10 +3,9 @@ package hu.progmatic.hotel.service;
 import hu.progmatic.hotel.model.Guest;
 import hu.progmatic.hotel.repository.GuestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
-import java.io.NotActiveException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,5 +37,9 @@ public class GuestService {
 
     public List<Guest> getAllGuest(){
         return guestRepository.findAll();
+    }
+
+    public List<Guest> getBirthDate(LocalDate date){
+        return guestRepository.findByBirthDay(date);
     }
 }

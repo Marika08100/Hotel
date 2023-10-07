@@ -3,6 +3,8 @@ package hu.progmatic.hotel.model;
 import jakarta.persistence.*;
 import org.springframework.context.annotation.Bean;
 
+import java.time.temporal.ChronoUnit;
+
 @Entity
 public class Room {
     @Id
