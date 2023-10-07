@@ -14,7 +14,7 @@ import java.util.Optional;
 public class GuestService {
     @Autowired
     private GuestRepository guestRepository;
-    public Guest creatOrUpdateGuest(Guest guest) throws NotActiveException {
+    public Guest creatOrUpdateGuest(Guest guest) {
         if (guest.getId() != null) {
             Optional<Guest> existingGuest = guestRepository.findById(guest.getId());
             if (existingGuest.isPresent()) {
@@ -29,12 +29,13 @@ public class GuestService {
                 updatedGuest.setActive(guest.isActive());
                 return guestRepository.save(updatedGuest);
             } else {
-                throw new NotActiveException();
+                throw new RuntimeException("A vendég nem található az adatbázisban.");
             }
         } else {
             return guestRepository.save(guest);
         }
     }
+
     public List<Guest> getAllGuest(){
         return guestRepository.findAll();
     }
