@@ -1,13 +1,14 @@
 package hu.progmatic.hotel.service;
 
 import hu.progmatic.hotel.model.Reservation;
-import hu.progmatic.hotel.model.Room;
 import hu.progmatic.hotel.repository.ReservationRepository;
 import hu.progmatic.hotel.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @Service
@@ -29,38 +30,23 @@ public class ReservationService {
         return reservationRepository.findAll();
     }
 
-// TODO a szálloda jelenlegi telítettségéről
-    public Map<Long, Integer> getOccupancy() {
-        List<Reservation> reservations = reservationRepository.findAll();
-        List<Room> rooms = roomRepository.findAll();
-        Map<Long, Integer> occupancyMap = new HashMap<>();
+    // TODO a szálloda jelenlegi telítettségéről
+    public List<Reservation> getReservationsForToday() {
+        LocalDate today = LocalDate.now();
+        return reservationRepository.findByStartDateLessThanEqualAndEndDateGreaterThanEqual(today, today);
+    }
 
-        for (Room room : rooms) {
-            occupancyMap.put(room.getId(), 0);
-        }
+    // TODO a szállodai adott napon lévő telítettségéről
+    public long getOccupancyForDate(LocalDate date, LocalDate localDate) {
+        List<Reservation> reservationsForDate = reservationRepository.findByStartDateAndEndDate(date, localDate);
+        return reservationsForDate.size();
+    }
 
-        for (Reservation reservation : reservations) {
-            Long roomId = reservation.getRoom().getId();
-            int currentOccupancy = occupancyMap.get(roomId);
-            occupancyMap.put(roomId, currentOccupancy + 1);
-        }
-
-        return occupancyMap;
+    public double getOccupancyPercentageForDate(LocalDate date) {
+        int totalRooms = (int) roomRepository.count();
+        int reservationsForDate = reservationRepository.findReservationsForDate(date).size();
+        return (double) reservationsForDate / totalRooms * 100;
     }
 
 
-// TODO a szállodai adott napon lévő telítettségéről
-
-    public List<Reservation> findByStartDate(@DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate) {
-        List<Reservation> reservations = reservationRepository.findByStartDate(startDate);
-        List<Reservation> filteredReservations = new ArrayList<>();
-
-        for (Reservation reservation : reservations) {
-            if (reservation.getStartDate().equals(startDate)) {
-                filteredReservations.add(reservation);
-            }
-        }
-
-        return filteredReservations;
-    }
 }

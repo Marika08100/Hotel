@@ -2,13 +2,11 @@ package hu.progmatic.hotel.controller;
 
 import hu.progmatic.hotel.model.Reservation;
 import hu.progmatic.hotel.service.ReservationService;
-import hu.progmatic.hotel.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,21 +40,18 @@ public class ReservationController {
     }
 
     @GetMapping("/occupancy")
-    public ResponseEntity<Map<Long, Integer>> getRoomOccupancy() {
-        Map<Long, Integer> occupancyData = reservationService.getOccupancy();
+    public ResponseEntity<List<Reservation>> getRoomOccupancy() {
+        List<Reservation> occupancyData = reservationService.getReservationsForToday();
         return ResponseEntity.ok(occupancyData);
     }
-
     @GetMapping("/occupancy/{date}")
-    public ResponseEntity<Map<Long, Integer>> getOccupancyByDate(@PathVariable @
-            DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
-        List<Reservation> reservations = reservationService.findByStartDate(date);
-
-        for (Reservation reservation : reservations) {
-            Long roomId = reservation.getRoom().getId();
-            occupancyMap.put(roomId, occupancyMap.getOrDefault(roomId, 0) + 1);
-        }
-        return ResponseEntity.ok(occupancyMap);
+    public ResponseEntity<Double> getOccupancyForDate(@PathVariable String date) {
+        LocalDate parsedDate = LocalDate.parse(date);
+        double occupancyPercentage = reservationService.getOccupancyPercentageForDate(parsedDate);
+        return ResponseEntity.ok(occupancyPercentage);
     }
+
+
+
 
 }
