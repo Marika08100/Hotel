@@ -13,5 +13,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     List<Reservation> findByStartDateLessThanEqualAndEndDateGreaterThanEqual(LocalDate startDate, LocalDate endDate);
 
     List<Reservation> findByStartDate(LocalDate startDate);
+
+
 }
 
