@@ -2,6 +2,7 @@ package hu.progmatic.hotel.controller;
 
 import hu.progmatic.hotel.model.Reservation;
 import hu.progmatic.hotel.service.ReservationService;
+import hu.progmatic.hotel.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -18,16 +19,15 @@ import java.util.Map;
 public class ReservationController {
 
     private final ReservationService reservationService;
+    private final RoomService roomService;
 
     Map<Long, Integer> occupancyMap = new HashMap<>();
 
     @Autowired
-    public ReservationController(ReservationService reservationService) {
+    public ReservationController(ReservationService reservationService, RoomService roomService) {
         this.reservationService = reservationService;
+        this.roomService = roomService;
     }
-
-
-
 
     @GetMapping()
     public String showReservation(Model model) {
@@ -36,13 +36,18 @@ public class ReservationController {
         return "reservation";
     }
 
-    @GetMapping({"/id"})
-
-
     // TODO Valósítsd meg, hogy lehessen foglalásokat létrehozni, módosítani és törölni!
-    @PostMapping("/")
-    public ResponseEntity<Reservation> createOrUpdateReservation(Reservation reservation) {
-        return ResponseEntity.ok(reservationService.createOrUpdateReservation(reservation));
+    @GetMapping("/new-date")
+    public String createReservationDate(Model model) {
+        model.addAttribute("reservation", new Reservation());
+        return "new-reservation-date";
+    }
+
+    @GetMapping("/new")
+    private String createReservation(@ModelAttribute("reservation") Reservation reservation, Model model) {
+        model.addAttribute("reservation", new Reservation());
+        model.addAttribute("rooms", roomService.findAlAvailableRoom(reservation.getStartDate(), reservation.getEndDate()));
+        return "new-reservation";
     }
 
     @DeleteMapping("/{id}")
@@ -63,6 +68,7 @@ public class ReservationController {
         List<Reservation> reservations = reservationService.getReservationsForDate(parsedDate);
         return ResponseEntity.ok(reservations);
     }
+
 
     @GetMapping("{reservationsId}/total-price")
     public ResponseEntity<Double> getTotalPrice(@PathVariable Long reservationsId) {

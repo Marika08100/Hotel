@@ -22,6 +22,7 @@ public class Room {
     @Column(name = "has_sauna")
     private boolean hasSauna;
 
+
     public Room() {
     }
 

@@ -4,6 +4,7 @@ import hu.progmatic.hotel.model.Reservation;
 import hu.progmatic.hotel.repository.ReservationRepository;
 import hu.progmatic.hotel.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -11,8 +12,9 @@ import java.util.*;
 
 @Service
 public class ReservationService {
-    private final  ReservationRepository reservationRepository;
+    private final ReservationRepository reservationRepository;
     private final RoomRepository roomRepository;
+
     @Autowired
     public ReservationService(ReservationRepository reservationRepository, RoomRepository roomRepository) {
         this.reservationRepository = reservationRepository;
@@ -21,6 +23,11 @@ public class ReservationService {
 
     public Reservation createOrUpdateReservation(Reservation reservation) {
         return reservationRepository.save(reservation);
+    }
+
+
+    public List<Reservation> betweenDates(LocalDate start, LocalDate end) {
+        return reservationRepository.findByStartDateLessThanEqualAndEndDateGreaterThanEqual(start, end);
     }
 
     public void deleteReservation(Long id) {
