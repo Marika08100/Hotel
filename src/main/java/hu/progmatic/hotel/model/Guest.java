@@ -2,6 +2,7 @@ package hu.progmatic.hotel.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -18,7 +19,7 @@ public class Guest {
     @Column(name = "birth_place")
     private String birthPlace;
     @Column(name = "birth_date")
-    private Date birthDate;
+    private LocalDate birthDate;
     @Column(name = "personal_id")
     private String personalId;
     @Column(name = "email")
@@ -29,7 +30,7 @@ public class Guest {
     public Guest() {
     }
 
-    public Guest(Long id, String title, String firstName, String lastName, String birthPlace, Date birthDate, String personalId, String email, boolean isActive) {
+    public Guest(Long id, String title, String firstName, String lastName, String birthPlace, LocalDate birthDate, String personalId, String email, boolean isActive) {
         this.id = id;
         this.title = title;
         this.firstName = firstName;
@@ -81,11 +82,11 @@ public class Guest {
         this.birthPlace = birthPlace;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 

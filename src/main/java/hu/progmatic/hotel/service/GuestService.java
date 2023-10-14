@@ -17,27 +17,7 @@ public class GuestService {
         this.guestRepository = guestRepository;
     }
 
-    public Guest creatOrUpdateGuest(Guest guest) {
-        if (guest.getId() != null) {
-            Optional<Guest> existingGuest = guestRepository.findById(guest.getId());
-            if (existingGuest.isPresent()) {
-                Guest updatedGuest = existingGuest.get();
-                updatedGuest.setTitle(guest.getTitle());
-                updatedGuest.setFirstName(guest.getFirstName());
-                updatedGuest.setLastName(guest.getLastName());
-                updatedGuest.setBirthPlace(guest.getBirthPlace());
-                updatedGuest.setBirthDate(guest.getBirthDate());
-                updatedGuest.setPersonalId(guest.getPersonalId());
-                updatedGuest.setEmail(guest.getEmail());
-                updatedGuest.setActive(guest.isActive());
-                return guestRepository.save(updatedGuest);
-            } else {
-                throw new RuntimeException("A vendég nem található az adatbázisban.");
-            }
-        } else {
-            return guestRepository.save(guest);
-        }
-    }
+
 
     public List<Guest> getAllGuest(){
         return guestRepository.findAll();
@@ -49,5 +29,9 @@ public class GuestService {
 
     public Guest getGuestById(Long id) {
         return guestRepository.findById(id).orElse(null);
+    }
+
+    public void save(Guest guest) {
+        guestRepository.save(guest);
     }
 }

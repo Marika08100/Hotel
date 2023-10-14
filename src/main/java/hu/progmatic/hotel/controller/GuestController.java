@@ -33,18 +33,21 @@ public class GuestController {
     }
 
     @GetMapping("/{id}")
-    public String getGuestById(@PathVariable("id") Long id,Model model){
-        model.addAttribute("guest",guestService.getGuestById(id));
+    public String getGuestById(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("guest", guestService.getGuestById(id));
         return "show-guest";
     }
 
-    @PostMapping("/register")
-    public String createOrUpdateGuest(@ModelAttribute Guest guest) {
-        guestService.getAllGuest();
-        if (!guest.isActive()) {
-            return "redirect:/guest";
-        }
-        return "register";
+    @GetMapping("/new")
+    public String newGuest(Model model){
+        model.addAttribute("guest",new Guest());
+        return "new-guest";
+    }
+
+    @PostMapping("/new")
+    public String newGuest(@ModelAttribute("guest") Guest guest){
+        guestService.save(guest);
+        return "redirect:/guest";
     }
 
     @GetMapping("/birthday/{date}")
