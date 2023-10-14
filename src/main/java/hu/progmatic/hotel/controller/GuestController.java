@@ -25,11 +25,17 @@ public class GuestController {
         this.guestService = guestService;
     }
 
-    @GetMapping("/guest")
+    @GetMapping()
     public String showGuest(Model model) {
         List<Guest> guests = guestService.getAllGuest();
-        model.addAttribute("guest", guests);
+        model.addAttribute("guests", guests);
         return "guest";
+    }
+
+    @GetMapping("/{id}")
+    public String getGuestById(@PathVariable("id") Long id,Model model){
+        model.addAttribute("guest",guestService.getGuestById(id));
+        return "show-guest";
     }
 
     @PostMapping("/register")

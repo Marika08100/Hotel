@@ -46,4 +46,8 @@ public class GuestService {
     public List<Guest> getBirthDate(LocalDate date){
         return guestRepository.findByBirthDay(date);
     }
+
+    public Guest getGuestById(Long id) {
+        return guestRepository.findById(id).orElse(null);
+    }
 }

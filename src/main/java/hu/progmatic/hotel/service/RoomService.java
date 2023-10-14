@@ -24,4 +24,7 @@ public class RoomService {
     }
 
 
+    public Room getRoomById(Long id) {
+        return roomRepository.findById(id).orElse(null);
+    }
 }

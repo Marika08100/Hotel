@@ -29,6 +29,12 @@ public class RoomController {
         return "room";
     }
 
+    @GetMapping("/{id}")
+    public String getRoomById(@PathVariable("id") Long id, Model model){
+        model.addAttribute("room", roomService.getRoomById(id));
+        return "show-room";
+    }
+
     // TODO Új szállodai szobákat ne lehessen se felvenni, se törölni, ám legyenek módosíthatóak a meglévők!
     @PostMapping("/")
     public ResponseEntity<Room> createOrUpdateRoom(@RequestBody Room room) {

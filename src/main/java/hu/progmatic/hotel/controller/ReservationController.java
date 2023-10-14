@@ -1,6 +1,5 @@
 package hu.progmatic.hotel.controller;
 
-import hu.progmatic.hotel.model.Guest;
 import hu.progmatic.hotel.model.Reservation;
 import hu.progmatic.hotel.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +35,7 @@ public class ReservationController {
     }
 
     @GetMapping({"/id"})
+
 
     // TODO Valósítsd meg, hogy lehessen foglalásokat létrehozni, módosítani és törölni!
     @PostMapping("/")

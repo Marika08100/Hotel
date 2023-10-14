@@ -20,8 +20,12 @@
     <tr th:each="reservation : ${reservations}">
         <td th:text="${reservation.startDate}"></td>
         <td th:text="${reservation.endDate}"></td>
-        <td th:text="${reservation.guest}"></td>
-        <td th:text="${reservation.room}"></td>
+        <td>
+            <a th:href="@{'/guest/' + ${reservation.guest.id}}">
+                <p th:text="${reservation.guest.title} + ' ' + ${reservation.guest.firstName} + ' ' + ${reservation.guest.lastName}"></p>
+            </a>
+        </td>
+        <td th:text="${reservation.room.roomNumber}"></td>
     </tr>
 </table>
 </body>
