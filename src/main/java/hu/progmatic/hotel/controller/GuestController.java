@@ -17,9 +17,9 @@ import java.util.List;
 
 @Controller
 public class GuestController {
-    @Autowired
     private final GuestService guestService;
 
+    @Autowired
     public GuestController(GuestService guestService) {
         this.guestService = guestService;
     }
@@ -39,6 +39,7 @@ public class GuestController {
         }
         return "register";
     }
+
     @GetMapping("/birthday/{date}")
     public ResponseEntity<List<Guest>> getGuestsBornOnDate(@PathVariable String date) {
         LocalDate parsedDate = LocalDate.parse(date);
