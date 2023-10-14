@@ -4,19 +4,20 @@ import hu.progmatic.hotel.model.Reservation;
 import hu.progmatic.hotel.repository.ReservationRepository;
 import hu.progmatic.hotel.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.time.LocalDate;
 import java.util.*;
 
 @Service
 public class ReservationService {
+    private final  ReservationRepository reservationRepository;
+    private final RoomRepository roomRepository;
     @Autowired
-    private ReservationRepository reservationRepository;
-    @Autowired
-    private RoomRepository roomRepository;
+    public ReservationService(ReservationRepository reservationRepository, RoomRepository roomRepository) {
+        this.reservationRepository = reservationRepository;
+        this.roomRepository = roomRepository;
+    }
 
     public Reservation createOrUpdateReservation(Reservation reservation) {
         return reservationRepository.save(reservation);

@@ -1,18 +1,19 @@
 package hu.progmatic.hotel.service;
 
-import hu.progmatic.hotel.model.Guest;
 import hu.progmatic.hotel.model.Room;
 import hu.progmatic.hotel.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class RoomService {
+    private final  RoomRepository roomRepository;
     @Autowired
-    private RoomRepository roomRepository;
+    public RoomService(RoomRepository roomRepository) {
+        this.roomRepository = roomRepository;
+    }
 
     public List<Room> findAllRoom() {
         return roomRepository.findAll();

@@ -11,8 +11,12 @@ import java.util.Optional;
 
 @Service
 public class GuestService {
+    private final GuestRepository guestRepository;
     @Autowired
-    private GuestRepository guestRepository;
+    public GuestService(GuestRepository guestRepository) {
+        this.guestRepository = guestRepository;
+    }
+
     public Guest creatOrUpdateGuest(Guest guest) {
         if (guest.getId() != null) {
             Optional<Guest> existingGuest = guestRepository.findById(guest.getId());

@@ -21,6 +21,7 @@ public class RoomController {
     public List<Room> getAllRooms() {
         return roomService.findAllRoom();
     }
+
 // TODO Új szállodai szobákat ne lehessen se felvenni, se törölni, ám legyenek módosíthatóak a meglévők!
     @PostMapping("/")
     public ResponseEntity<Room> createOrUpdateRoom(@RequestBody  Room room) {

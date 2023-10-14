@@ -20,5 +20,4 @@ public interface GuestRepository extends JpaRepository<Guest,Long> {
 
     @Query("SELECT g FROM Guest g WHERE DATE_FORMAT(g.birthDate, '%m-%d') = DATE_FORMAT(:localDate, '%m-%d')")
     List<Guest> findByBirthDay(@Param("localDate") LocalDate localDate);
-
 }

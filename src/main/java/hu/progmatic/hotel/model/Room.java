@@ -34,6 +34,8 @@ public class Room {
         this.hasSauna = hasSauna;
     }
 
+
+
     public Long getId() {
         return id;
     }
