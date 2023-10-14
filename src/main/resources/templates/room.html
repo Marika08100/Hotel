@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<a th:href = "@{/home}">Home</a>
+<table>
+    <thead>
+    <tr>
+        <td>Room number</td>
+        <td>Capacity</td>
+        <td>Price</td>
+        <td>Jacuzzi</td>
+        <td>Sauna</td>
+    </tr>
+    </thead>
+    <tr th:each="room : ${rooms}">
+        <td th:text="${room.roomNumber}"></td>
+        <td th:text="${room.capacity}"></td>
+        <td th:text="${room.nightlyPrice}"></td>
+        <td th:text="${room.hasJacuzzi}"></td>
+        <td th:text="${room.hasSauna}"></td>
+    </tr>
+</table>
+</body>
+</html>

@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
+@RequestMapping("/guest")
 public class GuestController {
     private final GuestService guestService;
 

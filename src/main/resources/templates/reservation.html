@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<a th:href="@{/home}">Home</a>
+<table>
+    <thead>
+    <tr>
+        <td>Start</td>
+        <td>End</td>
+        <td>Guests Number</td>
+        <td>Who</td>
+        <td>Where</td>
+    </tr>
+    </thead>
+    <tr th:each="reservation : ${reservations}">
+        <td th:text="${reservation.startDate}"></td>
+        <td th:text="${reservation.endDate}"></td>
+        <td th:text="${reservation.guest}"></td>
+        <td th:text="${reservation.room}"></td>
+    </tr>
+</table>
+</body>
+</html>
