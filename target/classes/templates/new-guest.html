@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/guest/new}" method="post">
+    <input type="text" placeholder="ex.: Mr.,Mrs." th:field="*{guest.title}">
+    <input type="text" placeholder="Your first name..." th:field="*{guest.firstName}">
+    <input type="text" placeholder="Your last name..." th:field="*{guest.lastName}">
+    <input type="text" placeholder="Your birth place.." th:field="*{guest.birthPlace}">
+    <input type="date" placeholder="Your birth date..." th:field="*{guest.birthDate}">
+    <input type="text" placeholder="Your personal ID.." th:field="*{guest.personalId}">
+    <input type="text" placeholder="Your email.." th:field="*{guest.email}">
+
+    <button type="submit"> OK </button>
+</form>
+</body>
+</html>
